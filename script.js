@@ -41,10 +41,12 @@ const typeController = (e) => {
   userText += newLetter;
 
   const newLetterCorrect = validate(newLetter);
+  console.log(errorCount)
 
   if (newLetterCorrect) {
     display.innerHTML += `<span class="green">${newLetter === " " ? "▪" : newLetter}</span>`;
   } else {
+    errorCount++
     display.innerHTML += `<span class="red">${newLetter === " " ? "▪" : newLetter}</span>`;
   }
 
@@ -54,11 +56,15 @@ const typeController = (e) => {
   }
 };
 
+
 const validate = (key) => {
+
   if (key === questionText[userText.length - 1]) {
     return true;
   }
+
   return false;
+
 };
 
 // FINISHED TYPING
@@ -134,7 +140,7 @@ displayHistory();
 setInterval(() => {
   const currentTime = new Date().getTime();
   const timeSpent = (currentTime - startTime) / 1000;
-  console.log(parseInt(timeSpent))
+
 
   document.getElementById("show-time").innerHTML = `${startTime ? parseInt(timeSpent) : 0} seconds`;
 }, 1000);
